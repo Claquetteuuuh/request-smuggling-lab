@@ -5,7 +5,7 @@ services:
     ports:
       - "3000:80"
     environment:
-      - CHALLENGE_MODE=TE.CL
+      - CHALLENGE_MODE=${CHALLENGE_MODE:-CL.TE}
     networks:
       - internal_net
     depends_on:

