@@ -7,7 +7,7 @@ Ce laboratoire est conçu pour pratiquer les attaques de HTTP Request Smuggling 
 ### 1. Installation
 Clonez ce dépôt :
 ```bash
-git clone [https://github.com/Claquetteuuuh/request-smuggling-lab](https://github.com/Claquetteuuuh/request-smuggling-lab)
+git clone https://github.com/Claquetteuuuh/request-smuggling-lab
 cd request-smuggling-lab
 ```
 
